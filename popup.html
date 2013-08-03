@@ -1,0 +1,29 @@
+<script src="jquery.js"></script>
+<script src="popup.js"></script>
+<style>
+  .advanced-settings, .normal-settings {
+    display: none;
+  }
+  .advanced-settings.show, .normal-settings.show {
+    display: block;
+  }
+</style>
+<div class="normal-settings show">
+    <select>
+      <option value="on">On</option>
+      <option value="off">Off</option>
+    </select>
+    <select>
+      <option value="spanish">Spanish</option>
+      <option value="french">French</option>
+    </select>
+    <select>
+      <option value="easy">Easy</option>
+      <option value="medium">Medium</option>
+      <option value="hard">Hard</option>
+    </select>
+    <button class="advanced-settings-button">Advanced Settings</button>
+</div>
+<div class="advanced-settings">
+    <input type="text"></input>
+</div>
