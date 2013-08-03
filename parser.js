@@ -84,4 +84,4 @@ function getRandomItem(list, weight) {
       return list[i];
     }
   }
-};
+}

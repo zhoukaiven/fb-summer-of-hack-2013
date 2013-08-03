@@ -1,18 +1,17 @@
-jQuery.fn.splitBySentence() = function(difficulty) {
+function splitBySentence(difficulty, probability) {
   $('p').each(function() {
     var rand = Math.random() * 10;
-
-    if (rand < difficulty) {
-      var sentence = $(this).getSentence('easy');
-      $(this).replace(sentence, "<span class='facebook_translate' data-original=\"" + sentence + "\">" + sentence + "</span>");
+    if (rand < probability) {
+      var sentence = $(this).getSentence(difficulty);
+      $(this).html($(this).html().replace(sentence, "<span class='facebook_translate' data-original=\"" + sentence + "\">" + sentence + "</span>"));
     }
 
   });
-};
+}
 
-jQuery.fn.splitByWord() = function() {
+function splitByWord(difficulty) {
   $('p').each(function() {
-      var word = $(this).getWord('easy');
-      $(this).replace(word, "<span class='facebook_translate' data-original=\"" + word + "\">" + word + "</span>");
+      var word = $(this).getWord(difficulty);
+      $(this).html($(this).html().replace(word, "<span class='facebook_translate' data-original=\"" + word + "\">" + word + "</span>"));
   });
-};
+}
