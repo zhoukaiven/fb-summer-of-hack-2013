@@ -1,4 +1,4 @@
-jQuery.fn.getSentences = function(num, mode) {
+jQuery.fn.getSentence() = function(mode) {
 
   // split paragraph into sentences
   var text = $(this).text();
@@ -26,16 +26,12 @@ jQuery.fn.getSentences = function(num, mode) {
     }
   }
 
-  var results = [];
+  var result = getRandomItems(sentences, weight);
 
-  for (var i = 0; i < num; i++) {
-    results.push(getRandomItem(sentences, weight));
-  }
-
-  return results;
+  return result;
 };
 
-function getRandomItem(list, weight) {
+function getRandomItems(list, weight) {
   var total_weight = weight.reduce(function (prev, cur, i, arr) {
     return prev + cur;
   });
@@ -56,4 +52,3 @@ function getRandomItem(list, weight) {
     }
   }
 };
-
