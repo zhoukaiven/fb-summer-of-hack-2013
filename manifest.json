@@ -7,7 +7,7 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["jquery.js", "script.js"]
+      "js": ["jquery.js", "parser.js", "script.js"]
     }
   ],
   "browser_action": {

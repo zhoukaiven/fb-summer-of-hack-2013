@@ -1,4 +1,4 @@
-jQuery.fn.getSentences = function(num) {
+jQuery.fn.getSentences = function(num, mode) {
 
   // split paragraph into sentences
   var text = $(this).text();
@@ -10,7 +10,7 @@ jQuery.fn.getSentences = function(num) {
   });
 
   // return num sentences weighted based on difficulty
-  var weight;
+  var weight = [];
 
   if (mode == 'random') {
     for (var i = 0; i < sentences.length; i++) {
@@ -26,16 +26,16 @@ jQuery.fn.getSentences = function(num) {
     }
   }
 
-  var result;
+  var results = [];
 
   for (var i = 0; i < num; i++) {
     results.push(getRandomItem(sentences, weight));
   }
 
-  return result;
+  return results;
 };
 
-function(list, weight) {
+function getRandomItem(list, weight) {
   var total_weight = weight.reduce(function (prev, cur, i, arr) {
     return prev + cur;
   });
