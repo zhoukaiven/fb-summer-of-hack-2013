@@ -12,7 +12,8 @@
     }
   ],
   "permissions":[
-	"storage"
+	"storage",
+	"tabs"
   ],
   "browser_action": {
     "default_icon": "img/langlearnicon.png",

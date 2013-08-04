@@ -20,12 +20,21 @@ $(document).ready(function () {
 	
 	$("#status").change(function(){
 		chrome.storage.sync.set({'status': $(this).val() });
+		chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
+			chrome.tabs.reload(tabs[0]['id']);
+		});
 	});
 	$("#lang").change(function(){
 		chrome.storage.sync.set({'lang': $(this).val() });
+		chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
+			chrome.tabs.reload(tabs[0]['id']);
+		});
 	});
 	$("#diff").change(function(){
 		chrome.storage.sync.set({'diff': $(this).val() });
+		chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
+			chrome.tabs.reload(tabs[0]['id']);
+		});
 	});
 
 });
