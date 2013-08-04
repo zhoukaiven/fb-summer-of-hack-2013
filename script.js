@@ -19,7 +19,7 @@ function splitByWord(difficulty) {
       var word = $(this).getWord(difficulty);
       var that = this;
       translate('en', 'es', word, function (translatedWord) {
-        $(that).html($(that).html().replace(word, "<span class='facebook_translate' style='background-color:red' data-original=\"" + word + "\">" + translatedWord + "</span>"));
+        $(that).html($(that).html().replace(\bword\b, "<span class='facebook_translate' style='background-color:red' data-original=\"" + word + "\">" + translatedWord + "</span>"));
       });
   });
 }
@@ -36,18 +36,17 @@ function splitBySentence(difficulty, probability) {
     }
   });
 }
-//
 
 if (difficulty == 1) {
     splitByWord('easy');
 } else if (difficulty == 2) {
     splitByWord('hard');
 } else if (difficulty == 3) {
-    splitBySentence('random', 5);
+    splitBySentence('easy', 5);
 } else if (difficulty == 4) {
-    splitBySentence('random', 7);
+    splitBySentence('medium', 7);
 } else {
-    splitBySentence('random', 9);
+    splitBySentence('hard', 9);
 }
 
 

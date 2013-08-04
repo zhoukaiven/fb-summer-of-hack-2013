@@ -12,7 +12,7 @@ jQuery.fn.getWord = function(mode) {
   // return num words weighted based on difficulty
   var weight = [];
 
-  if (mode == 'random') {
+  if (mode == 'medium') {
     for (var i = 0; i < words.length; i++) {
       weight.push(1);
     }
