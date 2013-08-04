@@ -1,8 +1,8 @@
-jQuery.fn.getWord() = function(mode) {
+jQuery.fn.getWord = function(mode) {
 
   // split paragraph into sentences
   var text = $(this).text();
-  var words = text.split(" ");
+  var words = text.replace(/\n/g, " ").split(/[^A-Za-z'-]/);
 
   // sort by length
   words.sort(function(a, b) {
@@ -21,7 +21,7 @@ jQuery.fn.getWord() = function(mode) {
       weight.push(words[i].length*10);
     }
   } else if (mode == 'hard') {
-    for (var i = words.length; i >= 0; i--) {
+    for (var i = words.length - 1; i >= 0; i--) {
       weight.push(words[i].length*10);
     }
   }
@@ -31,11 +31,11 @@ jQuery.fn.getWord() = function(mode) {
   return result;
 };
 
-jQuery.fn.getSentence() = function(mode) {
+jQuery.fn.getSentence = function(mode) {
 
   // split paragraph into sentences
   var text = $(this).text();
-  var sentences = text.split(/[.?!]+/);
+  var sentences = text.replace(/\n/g, "").split(/[.?!]+/);
 
   // sort by length
   sentences.sort(function(a, b) {
@@ -54,7 +54,7 @@ jQuery.fn.getSentence() = function(mode) {
       weight.push(sentences[i].length*10);
     }
   } else if (mode == 'hard') {
-    for (var i = sentences.length; i >= 0; i--) {
+    for (var i = sentences.length - 1; i > 0; i--) {
       weight.push(sentences[i].length*10);
     }
   }
