@@ -1,9 +1,16 @@
 $(document).ready(function () {
-
 	chrome.storage.sync.get(['status', 'lang', 'diff'], function(data){
-		$("#status").val(data.status || "off") ;
-		$("#lang").val(data.lang || "ar");
-		$("#diff").val(data.diff || "easy");
+		data.status = data.status ? data.status : "on";
+		$("#status").val(data.status);
+		chrome.storage.sync.set({'status' : data.status})
+		
+		data.lang = data.lang ? data.lang : "ar";
+		$("#lang").val(data.lang);
+		chrome.storage.sync.set({'lang' : data.lang})
+		
+		data.diff = data.diff ? data.diff : "1";
+		$("#diff").val(data.diff);
+		chrome.storage.sync.set({'diff' : data.diff})	
 	});
 
     $('.advanced-settings-button').click(function () {
