@@ -19,7 +19,7 @@ function splitByWord(difficulty) {
       var word = $(this).getWord(difficulty);
       var that = this;
       translate('en', 'es', word, function (translatedWord) {
-        $(that).html($(that).html().replace(\bword\b, "<span class='facebook_translate' style='background-color:red' data-original=\"" + word + "\">" + translatedWord + "</span>"));
+        $(that).html($(that).html().replace(new RegExp("\\b" + word + "\\b", 'i'), "<span class='facebook_translate' style='background-color:red' data-original=\"" + word + "\">" + translatedWord + "</span>"));
       });
   });
 }
