@@ -45,7 +45,7 @@ jQuery.fn.getSentence = function(mode) {
   // return num sentences weighted based on difficulty
   var weight = [];
 
-  if (mode == 'random') {
+  if (mode == 'medium') {
     for (var i = 0; i < sentences.length; i++) {
       weight.push(1);
     }
