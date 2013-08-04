@@ -21,7 +21,4 @@ $(document).ready(function () {
 		chrome.storage.sync.set({'diff': $(this).val() });
 	});
 
-	
-
-
 });
