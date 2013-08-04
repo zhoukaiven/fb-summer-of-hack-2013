@@ -10,6 +10,7 @@ function load(callback){
     on = data.status;
     language = data.lang;
     difficulty = data.diff;
+    volume = data.volume;
 
     if(on == "on"){
         callback();
@@ -20,14 +21,14 @@ function load(callback){
 $(document).ready(function () {
 
   load(function() {
-
-    if (volume == "1") {
     function playSpeech(text) {
-      if ($('#translate-video').length > 0) {
-        $('#translate-video').html("<video controls='' autoplay name='media' id='translate-video' style='display:none'><source id='video-source' src='http://translate.google.com/translate_tts?tl=" + language + "&q=" + text.replace(' ','+').replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"") + "' type='audio/mpeg'></video>");
-      } else {
-        $('body').append("<video controls='' autoplay name='media'  id='translate-video' style='display:none'><source id='video-source' src='http://translate.google.com/translate_tts?tl=" + language + "&q=" + text.replace(' ','+').replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"") + "' type='audio/mpeg'></video>");
-      }
+        if (volume == "1") {
+            if ($('#translate-video').length > 0) {
+                $('#translate-video').html("<video controls='' autoplay name='media' id='translate-video' style='display:none'><source id='video-source' src='http://translate.google.com/translate_tts?tl=" + language + "&q=" + text.replace(' ','+').replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"") + "' type='audio/mpeg'></video>");
+            } else {
+                $('body').append("<video controls='' autoplay name='media'  id='translate-video' style='display:none'><source id='video-source' src='http://translate.google.com/translate_tts?tl=" + language + "&q=" + text.replace(' ','+').replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"") + "' type='audio/mpeg'></video>");
+            }
+        }
     }
 
     function translate(from, to, text, cb) {
