@@ -48,7 +48,7 @@ $(document).ready(function () {
         var that = this;
         translate('en', language, word, function (translatedWord) {
          $(that).html($(that).html().replace(/<\/*.+?>/g, '').replace(new RegExp("\\b" + word + "\\b", 'i'), "<span class='translate_14385' style='background-color: #FFFAB0;' data-original=\"" + word + "\">" + translatedWord + "</span>"));
-          $('.translate_14385').hover(function() {
+          $('.translate_14385').click(function() {
             playSpeech(translatedWord);
           });
         });
@@ -63,7 +63,7 @@ $(document).ready(function () {
           var that = this;
           translate('en', language, sentence, function (translatedSentence) {
            $(that).html($(that).html().replace(/<\/*.+?>/g, '').replace(sentence, "<span class='translate_14385' style='background-color: #FFFAB0;' data-original=\"" + sentence + "\">" + translatedSentence + "</span>"));
-            $('.translate_14385').hover(function() {
+            $('.translate_14385').click(function() {
               console.log($(this).text());
               playSpeech($(this).text());
             });
