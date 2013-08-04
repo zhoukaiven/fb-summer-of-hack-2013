@@ -53,11 +53,11 @@ $(document).ready(function () {
     } else if (difficulty == 2) {
       splitByWord('hard');
     } else if (difficulty == 3) {
-      splitBySentence('easy', 5);
+      splitBySentence('easy', 4);
     } else if (difficulty == 4) {
-      splitBySentence('medium', 7);
+      splitBySentence('medium', 6);
     } else if (difficulty == 5) {
-      splitBySentence('hard', 9);
+      splitBySentence('hard', 10);
     }
   });
 });
