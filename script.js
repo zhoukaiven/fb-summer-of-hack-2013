@@ -36,7 +36,7 @@ $(document).ready(function () {
 
     function splitBySentence(difficulty, probability) {
       $('p').each(function() {
-        var rand = Math.random() * 11;
+        var rand = Math.random() * 10;
         if (rand < probability) {
           var sentence = $(this).getSentence(difficulty);
           var that = this;
@@ -56,7 +56,7 @@ $(document).ready(function () {
     } else if (difficulty == 4) {
       splitBySentence('medium', 6);
     } else if (difficulty == 5) {
-      splitBySentence('hard', 10);
+      splitBySentence('hard', 11);
     }
   });
 });
