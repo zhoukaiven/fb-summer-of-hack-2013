@@ -56,12 +56,18 @@ jQuery.fn.getSentence = function(mode) {
       weight.push(1);
     }
   } else if (mode == 'easy') {
+    sentences.sort(function(a,b) {
+      return a.length < b.length;
+    });
     for (var i = 0; i < sentences.length; i++) {
-      weight.push(sentences[i].length*10);
+      weight.push(i*10);
     }
   } else if (mode == 'hard') {
-    for (var i = sentences.length - 1; i > 0; i--) {
-      weight.push(sentences[i].length*10);
+    sentences.sort(function(a,b) {
+      return a.length < b.length;
+    });
+    for (var i = sentences.length - 1; i >= 0; i--) {
+      weight.push(i*10);
     }
   }
 
