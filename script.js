@@ -15,7 +15,6 @@ function load(callback){
 $(document).ready(function () {
   load(function(){
     function translate(from, to, text, cb) {
-      //alert('translate: ' + to)
       $.ajax({
         url: 'http://api.microsofttranslator.com/V2/Ajax.svc/Translate?oncomplete=?&appId=68D088969D79A8B23AF8585CC83EBA2A05A97651&from=' + from + '&to=' + to + '&text=' + encodeURIComponent(text),
         type: "GET",
