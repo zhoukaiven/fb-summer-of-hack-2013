@@ -10,7 +10,9 @@ function load(callback){
     language = data.lang;
     difficulty = data.diff;
 
-    callback();
+    if(on == "on"){
+        callback();
+    }
   });
 }
 
