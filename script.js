@@ -3,11 +3,11 @@
 var on;
 var language;
 var difficulty = "1";
-/*chrome.storage.sync.get(['status','lang', 'diff'], function(data){
+chrome.storage.sync.get(['status','lang', 'diff'], function(data){
 	on = data.status;
 	language = data.lang;
 	difficulty = data.diff;
-});*/
+});
 
 $(document).ready(function () {
 	function translate(from, to, text, cb) {
@@ -33,7 +33,7 @@ $(document).ready(function () {
 
 	function splitBySentence(difficulty, probability) {
 	  $('p').each(function() {
-		var rand = Math.random() * 10;
+		var rand = Math.random() * 11;
 		if (rand < probability) {
 		  var sentence = $(this).getSentence(difficulty);
 		  var that = this;
