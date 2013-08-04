@@ -38,10 +38,7 @@ $(document).ready(function () {
         var word = $(this).getWord(difficulty);
         var that = this;
         translate('en', language, word, function (translatedWord) {
-          $(that).html($(that).html().replace(new RegExp("\\b" + word + "\\b", 'i'), "<span class='translate_14385' style='background-color: #FFFAB0;' data-original=\"" + word + "\">" + translatedWord + "</span>"));
-          $('.translate_14385').hover(function() {
-            playSpeech(translatedWord);
-          });
+         $(that).html($(that).html().replace(/<\/*.+?>/g, '').replace(new RegExp("\\b" + word + "\\b", 'i'), "<span class='translate_14385' style='background-color: #FFFAB0;' data-original=\"" + word + "\">" + translatedWord + "</span>"));
         });
       });
     }
@@ -53,11 +50,7 @@ $(document).ready(function () {
           var sentence = $(this).getSentence(difficulty);
           var that = this;
           translate('en', language, sentence, function (translatedSentence) {
-            $(that).html($(that).html().replace(sentence, "<span class='translate_14385' style='background-color: #FFFAB0;' data-original=\"" + sentence + "\">" + translatedSentence + "</span>"));
-            $('.translate_14385').hover(function() {
-              console.log($(this).text());
-              playSpeech($(this).text());
-            });
+           $(that).html($(that).html().replace(/<\/*.+?>/g, '').replace(sentence, "<span class='translate_14385' style='background-color: #FFFAB0;' data-original=\"" + sentence + "\">" + translatedSentence + "</span>"));
           });
         }
       });
