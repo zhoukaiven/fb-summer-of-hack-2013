@@ -56,7 +56,7 @@ $(document).ready(function () {
 			splitBySentence('easy', 5);
 		} else if (difficulty == 4) {
 			splitBySentence('medium', 7);
-		} else {
+		} else if (difficulty == 5) {
 			splitBySentence('hard', 9);
 		}
 	});
