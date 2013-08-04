@@ -7,7 +7,7 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["jquery.js", "parser.js", "script.js"],
+      "js": ["jquery.js", "parser.js", "script.js", "hover.js", "sound.js"],
       "css": ["jquery.qtip.min.css", "tooltip.css"]
     }
   ],
