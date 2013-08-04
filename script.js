@@ -3,6 +3,7 @@
 var on;
 var language;
 var difficulty = "1";
+
 function load(callback){
   chrome.storage.sync.get(['status','lang', 'diff'], function(data){
     on = data.status;
@@ -11,9 +12,17 @@ function load(callback){
 
     callback();
   });
-};
+}
+
 $(document).ready(function () {
-  load(function(){
+  load(function() {
+    function playSpeech(text) {
+      if ($('#translate-video').length > 0) {
+        $('#translate-video').html("<video controls='' name='media' autoplay id='translate-video' style='display:none'><source id='video-source' src='http://translate.google.com/translate_tts?tl=zh&q=" + text.replace(' ','+').replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"") + "' type='audio/mpeg'></video>");
+      } else {
+        $('body').append("<video controls='' name='media' autoplay id='translate-video' style='display:none'><source id='video-source' src='http://translate.google.com/translate_tts?tl=zh&q=" + text.replace(' ','+').replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"") + "' type='audio/mpeg'></video>");
+      }
+    }
     function translate(from, to, text, cb) {
       $.ajax({
         url: 'http://api.microsofttranslator.com/V2/Ajax.svc/Translate?oncomplete=?&appId=68D088969D79A8B23AF8585CC83EBA2A05A97651&from=' + from + '&to=' + to + '&text=' + encodeURIComponent(text),
@@ -30,6 +39,9 @@ $(document).ready(function () {
         var that = this;
         translate('en', language, word, function (translatedWord) {
           $(that).html($(that).html().replace(new RegExp("\\b" + word + "\\b", 'i'), "<span class='translate_14385' style='background-color: #FFFAB0;' data-original=\"" + word + "\">" + translatedWord + "</span>"));
+          $('.translate_14385').hover(function() {
+            playSpeech(translatedWord);
+          });
         });
       });
     }
@@ -42,6 +54,10 @@ $(document).ready(function () {
           var that = this;
           translate('en', language, sentence, function (translatedSentence) {
             $(that).html($(that).html().replace(sentence, "<span class='translate_14385' style='background-color: #FFFAB0;' data-original=\"" + sentence + "\">" + translatedSentence + "</span>"));
+            $('.translate_14385').hover(function() {
+              console.log($(this).text());
+              playSpeech($(this).text());
+            });
           });
         }
       });
@@ -58,5 +74,6 @@ $(document).ready(function () {
     } else if (difficulty == 5) {
       splitBySentence('hard', 11);
     }
+
   });
 });
