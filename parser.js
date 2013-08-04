@@ -17,12 +17,18 @@ jQuery.fn.getWord = function(mode) {
       weight.push(1);
     }
   } else if (mode == 'easy') {
+    words.sort(function(a,b) {
+      return a.length < b.length;
+    });
     for (var i = 0; i < words.length; i++) {
-      weight.push(words[i].length*10);
+      weight.push(i*10);
     }
   } else if (mode == 'hard') {
+    words.sort(function(a,b) {
+      return a.length < b.length;
+    });
     for (var i = words.length - 1; i >= 0; i--) {
-      weight.push(words[i].length*10);
+      weight.push(i*10);
     }
   }
 
