@@ -1,3 +1,4 @@
+// Retrieve a random word in a given element
 jQuery.fn.getWord = function(mode) {
 
   // split paragraph into sentences
@@ -37,6 +38,7 @@ jQuery.fn.getWord = function(mode) {
   return result;
 };
 
+// Retrieve a random sentence in a given element
 jQuery.fn.getSentence = function(mode) {
 
   // split paragraph into sentences
@@ -76,6 +78,7 @@ jQuery.fn.getSentence = function(mode) {
   return result;
 };
 
+// Get weighted random element
 function getRandomItem(list, weight) {
   var total_weight = weight.reduce(function (prev, cur, i, arr) {
     return prev + cur;
