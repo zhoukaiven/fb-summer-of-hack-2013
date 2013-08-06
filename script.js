@@ -1,18 +1,18 @@
 // GLOBAL SETTINGS
-
 var on;
 var language;
 var difficulty = "1";
 var volume = "0";
 
-function load(callback){
-  chrome.storage.sync.get(['status', 'volume', 'lang', 'diff'], function(data){
+// initialize on load
+function load(callback) {
+  chrome.storage.sync.get(['status', 'volume', 'lang', 'diff'], function(data) {
     on = data.status;
     language = data.lang;
     difficulty = data.diff;
     volume = data.volume;
 
-    if(on == "on"){
+    if(on == "on") {
         callback();
     }
   });
@@ -21,7 +21,10 @@ function load(callback){
 $(document).ready(function () {
 
   load(function() {
+
+    // Bind playSpeech function
     function playSpeech(text) {
+        // If sound is on
         if (volume == "1") {
             if ($('#translate-video').length > 0) {
                 $('#translate-video').html("<video controls='' autoplay name='media' id='translate-video' style='display:none'><source id='video-source' src='http://translate.google.com/translate_tts?tl=" + language + "&q=" + text.replace(' ','+').replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"") + "' type='audio/mpeg'></video>");
@@ -31,6 +34,7 @@ $(document).ready(function () {
         }
     }
 
+    // Translate text
     function translate(from, to, text, cb) {
       $.ajax({
         url: 'http://api.microsofttranslator.com/V2/Ajax.svc/Translate?oncomplete=?&appId=68D088969D79A8B23AF8585CC83EBA2A05A97651&from=' + from + '&to=' + to + '&text=' + encodeURIComponent(text),
