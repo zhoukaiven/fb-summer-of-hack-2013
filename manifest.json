@@ -4,6 +4,8 @@
   "name": "Living Language",
   "description": "This extension interatively teaches you a new language by changing snippets of text while you browse the web.",
   "version": "1.0",
+  "icons": { "48": "img/icon48.png", 
+    "128": "img/icon128.png" }
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
@@ -16,7 +18,7 @@
 	"tabs"
   ],
   "browser_action": {
-    "default_icon": "img/langlearnicon.png",
+    "default_icon": "img/icon48.png",
     "default_popup": "popup.html",
     "default_popup_js": "popup.js"
   }
