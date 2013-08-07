@@ -1,5 +1,9 @@
 <script src="jquery.js"></script>
 <script src="popup.js"></script>
+<script src="hover.js"></script>
+<script src="sound.js"></script>
+<link href="tooltip.css" rel="stylesheet" type="text/css">
+<link href="jquery.qtip.min.css" rel="stylesheet" type="text/css">
 <style>
   .advanced-settings, .normal-settings {
     display: none;
@@ -12,6 +16,10 @@
     <select id="status">
       <option value="on">On</option>
       <option value="off">Off</option>
+    </select>
+    <select id="volume">
+      <option value="1">Volume On</option>
+      <option value="0">Volume Off</option>
     </select>
     <select id="lang">
       <option value="ar">Arabic</option>
@@ -47,6 +55,7 @@
       <option value="ru">Russian</option>
       <option value="sk">Slovak</option>
       <option value="sl">Slovenian</option>
+      <option value="es">Spanish</option>
       <option value="sv">Swedish</option>
       <option value="th">Thai</option>
       <option value="tr">Turkish</option>
@@ -55,18 +64,14 @@
       <option value="vi">Vietnamese</option>
     </select>
     <select id = "diff">
-      <option value="easy">You ain't trying</option>
-      <option value="medium">Learning shit now</option>
-      <option value="hard">You the man!</option>
-      <option value="god">God Mode</option>
+      <option value="1">You ain't trying</option>
+      <option value="2">Getting better</option>
+      <option value="3">Learning shit now</option>
+      <option value="4">You da man!</option>
+      <option value="5">God Mode</option>
     </select>
-    <button class="advanced-settings-button">Advanced Settings</button>
-</div>
-<div class="advanced-settings">
-    <input type="text"></input>
 </div>
 
-<div class="tooltiptext">
-   Test 
+<div class="tooltiptext" style="display: none;">
+  Test
 </div>
-

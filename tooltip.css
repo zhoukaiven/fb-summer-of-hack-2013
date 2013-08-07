@@ -1,0 +1,19 @@
+.translate_14385{
+    display: inline;
+    position: relative;
+}
+
+.translate_14385:hover:after{
+    background: #333;
+    background: rgba(0,0,0,.7);
+    border-radius: 5px;
+    bottom: 26px;
+    color: #fff;
+    content: attr(data-original);
+    left: 20%;
+    padding: 5px 5px;
+    position: absolute;
+    text-align: center;
+    z-index: 98;
+    min-width: 100px;
+}

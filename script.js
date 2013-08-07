@@ -1,53 +1,88 @@
 // GLOBAL SETTINGS
+
 var on;
 var language;
-var difficulty = 1;
-//
+var difficulty = "1";
+var volume = "0";
 
-function translate(from, to, text, cb) {
-    $.ajax({
-        url: 'http://api.microsofttranslator.com/V2/Ajax.svc/Translate?oncomplete=?&appId=68D088969D79A8B23AF8585CC83EBA2A05A97651&from=' + from + '&to=' + to + '&text=' + encodeURIComponent(text),
-        type: "GET",
-        success: function(data) {
-            cb(decodeURIComponent(data.substr(1, data.length - 2)));
-        }
-    });
-}
-// Split Functions
-function splitByWord(difficulty) {
-  $('p').each(function() {
-      var word = $(this).getWord(difficulty);
-      var that = this;
-      translate('en', 'es', word, function (translatedWord) {
-        $(that).html($(that).html().replace(word, "<span class='facebook_translate' style='background-color:red' data-original=\"" + word + "\">" + translatedWord + "</span>"));
-      });
-  });
-}
+function load(callback){
+  chrome.storage.sync.get(['status', 'volume', 'lang', 'diff'], function(data){
+    on = data.status;
+    language = data.lang;
+    difficulty = data.diff;
+    volume = data.volume;
 
-function splitBySentence(difficulty, probability) {
-  $('p').each(function() {
-    var rand = Math.random() * 10;
-    if (rand < probability) {
-      var sentence = $(this).getSentence(difficulty);
-      var that = this;
-      translate('en', 'es', sentence, function (translatedSentence) {
-        $(that).html($(that).html().replace(sentence, "<span class='facebook_translate' style='background-color:red' data-original=\"" + sentence + "\">" + translatedSentence + "</span>"));
-      });
+    if(on == "on"){
+        callback();
     }
   });
 }
-//
 
-if (difficulty == 1) {
-    splitByWord('easy');
-} else if (difficulty == 2) {
-    splitByWord('hard');
-} else if (difficulty == 3) {
-    splitBySentence('random', 5);
-} else if (difficulty == 4) {
-    splitBySentence('random', 7);
-} else {
-    splitBySentence('random', 9);
-}
+$(document).ready(function () {
 
+  load(function() {
+    function playSpeech(text) {
+        if (volume == "1") {
+            if ($('#translate-video').length > 0) {
+                $('#translate-video').html("<video controls='' autoplay name='media' id='translate-video' style='display:none'><source id='video-source' src='http://translate.google.com/translate_tts?tl=" + language + "&q=" + text.replace(' ','+').replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"") + "' type='audio/mpeg'></video>");
+            } else {
+                $('body').append("<video controls='' autoplay name='media'  id='translate-video' style='display:none'><source id='video-source' src='http://translate.google.com/translate_tts?tl=" + language + "&q=" + text.replace(' ','+').replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"") + "' type='audio/mpeg'></video>");
+            }
+        }
+    }
 
+    function translate(from, to, text, cb) {
+      $.ajax({
+        url: 'http://api.microsofttranslator.com/V2/Ajax.svc/Translate?oncomplete=?&appId=68D088969D79A8B23AF8585CC83EBA2A05A97651&from=' + from + '&to=' + to + '&text=' + encodeURIComponent(text),
+        type: "GET",
+        success: function(data) {
+          cb(decodeURIComponent(data.substr(1, data.length - 2)));
+        }
+      });
+    }
+
+    // Split Functions
+    function splitByWord(difficulty) {
+      $('p').each(function() {
+        var word = $(this).getWord(difficulty);
+        var that = this;
+        translate('en', language, word, function (translatedWord) {
+         $(that).html($(that).html().replace(/<\/*.+?>/g, '').replace(new RegExp("\\b" + word + "\\b", 'i'), "<span class='translate_14385' style='background-color: #FFFAB0;' data-original=\"" + word + "\">" + translatedWord + "</span>"));
+          $('.translate_14385').click(function() {
+            playSpeech(translatedWord);
+          });
+        });
+      });
+    }
+
+    function splitBySentence(difficulty, probability) {
+      $('p').each(function() {
+        var rand = Math.random() * 10;
+        if (rand < probability) {
+          var sentence = $(this).getSentence(difficulty);
+          var that = this;
+          translate('en', language, sentence, function (translatedSentence) {
+           $(that).html($(that).html().replace(/<\/*.+?>/g, '').replace(sentence, "<span class='translate_14385' style='background-color: #FFFAB0;' data-original=\"" + sentence + "\">" + translatedSentence + "</span>"));
+            $('.translate_14385').click(function() {
+              console.log($(this).text());
+              playSpeech($(this).text());
+            });
+          });
+        }
+      });
+    }
+
+    if (difficulty == 1) {
+      splitByWord('easy');
+    } else if (difficulty == 2) {
+      splitByWord('hard');
+    } else if (difficulty == 3) {
+      splitBySentence('easy', 4);
+    } else if (difficulty == 4) {
+      splitBySentence('medium', 6);
+    } else if (difficulty == 5) {
+      splitBySentence('hard', 11);
+    }
+
+  });
+});

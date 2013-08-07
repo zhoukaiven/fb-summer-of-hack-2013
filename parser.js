@@ -12,17 +12,23 @@ jQuery.fn.getWord = function(mode) {
   // return num words weighted based on difficulty
   var weight = [];
 
-  if (mode == 'random') {
+  if (mode == 'medium') {
     for (var i = 0; i < words.length; i++) {
       weight.push(1);
     }
   } else if (mode == 'easy') {
+    words.sort(function(a,b) {
+      return a.length < b.length;
+    });
     for (var i = 0; i < words.length; i++) {
-      weight.push(words[i].length*10);
+      weight.push(i*10);
     }
   } else if (mode == 'hard') {
+    words.sort(function(a,b) {
+      return a.length < b.length;
+    });
     for (var i = words.length - 1; i >= 0; i--) {
-      weight.push(words[i].length*10);
+      weight.push(i*10);
     }
   }
 
@@ -45,17 +51,23 @@ jQuery.fn.getSentence = function(mode) {
   // return num sentences weighted based on difficulty
   var weight = [];
 
-  if (mode == 'random') {
+  if (mode == 'medium') {
     for (var i = 0; i < sentences.length; i++) {
       weight.push(1);
     }
   } else if (mode == 'easy') {
+    sentences.sort(function(a,b) {
+      return a.length < b.length;
+    });
     for (var i = 0; i < sentences.length; i++) {
-      weight.push(sentences[i].length*10);
+      weight.push(i*10);
     }
   } else if (mode == 'hard') {
-    for (var i = sentences.length - 1; i > 0; i--) {
-      weight.push(sentences[i].length*10);
+    sentences.sort(function(a,b) {
+      return a.length < b.length;
+    });
+    for (var i = sentences.length - 1; i >= 0; i--) {
+      weight.push(i*10);
     }
   }
 
