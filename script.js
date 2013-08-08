@@ -27,9 +27,27 @@ $(document).ready(function () {
         // If sound is on
         if (volume == "1") {
             if ($('#translate-video').length > 0) {
-                $('#translate-video').html("<video controls='' autoplay name='media' id='translate-video' style='display:none'><source id='video-source' src='http://translate.google.com/translate_tts?tl=" + language + "&q=" + text.replace(' ','+').replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"") + "' type='audio/mpeg'></video>");
+
+                // Make text URL safe
+                text = text.replace(' ','+').replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+
+                // If the text can fit in a single call
+                if (text.length < 100) {
+                    $('#translate-video').attr('src', 'http://translate.google.com/translate_tts?tl=' + language + '&q=' + text);
+                } else {
+                    // Else split it up into 100 char chunks and play it piece by piece
+                    var i = 0;
+
+                    while (i + 99 < text.length) {
+                        subtext = text.substring(i, i + 99);
+                        $('#translate-video').attr('src', 'http://translate.google.com/translate_tts?tl=' + language + '&q=' + subtext);
+                        $('translate-video')[0].load();
+                        i += 100;
+                    }
+                }
             } else {
-                $('body').append("<video controls='' autoplay name='media'  id='translate-video' style='display:none'><source id='video-source' src='http://translate.google.com/translate_tts?tl=" + language + "&q=" + text.replace(' ','+').replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"") + "' type='audio/mpeg'></video>");
+                $('body').append("<video controls='' autoplay name='media'  id='translate-video' style='display:none'><source id='video-source' src='' type='audio/mpeg'></video>");
+                playSpeech(text);
             }
         }
     }
@@ -68,7 +86,6 @@ $(document).ready(function () {
           translate('en', language, sentence, function (translatedSentence) {
             $(that).html($(that).html().replace(/<\/*.+?>/g, '').replace(sentence, "<span class='translate_14385' style='background-color: #FFFAB0;' data-original=\"" + sentence + "\">" + translatedSentence + "</span>"));
             $('.translate_14385').click(function() {
-              console.log($(this).text());
               playSpeech($(this).text());
             });
           });
