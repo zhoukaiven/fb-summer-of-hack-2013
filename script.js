@@ -38,12 +38,17 @@ $(document).ready(function () {
                     // Else split it up into 100 char chunks and play it piece by piece
                     var i = 0;
 
-                    while (i + 99 < text.length) {
-                        subtext = text.substring(i, i + 99);
+                    while (i+99 < text.length) {
+                        subtext = text.substring(i, i+99);
                         $('#translate-video').attr('src', 'http://translate.google.com/translate_tts?tl=' + language + '&q=' + subtext);
                         $('translate-video')[0].load();
                         i += 100;
                     }
+
+                    // Play last bit
+                    subtext = text.substring(i, text.length-1);
+                    $('#translate-video').attr('src', 'http://translate.google.com/translate_tts?tl=' + language + '&q=' + subtext);
+                    $('translate-video')[0].load();
                 }
             } else {
                 $('body').append("<video controls='' autoplay name='media'  id='translate-video' style='display:none'><source id='video-source' src='' type='audio/mpeg'></video>");
