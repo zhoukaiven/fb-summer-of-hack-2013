@@ -5,12 +5,12 @@
   "description": "This extension interatively teaches you a new language by changing snippets of text while you browse the web.",
   "version": "1.0",
   "icons": { "48": "img/icon48.png", 
-    "128": "img/icon128.png" }
+    "128": "img/icon128.png" },
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
       "js": ["jquery.js", "parser.js", "script.js"],
-      "css": ["jquery.qtip.min.css", "tooltip.css"]
+      "css": ["tooltip.css"]
     }
   ],
   "permissions":[
